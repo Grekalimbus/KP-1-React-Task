@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/KP-1-React-Task/static/css/main.24b68c36.css",
+    "main.js": "/KP-1-React-Task/static/js/main.f207eb47.js",
+    "index.html": "/KP-1-React-Task/index.html",
+    "main.24b68c36.css.map": "/KP-1-React-Task/static/css/main.24b68c36.css.map",
+    "main.f207eb47.js.map": "/KP-1-React-Task/static/js/main.f207eb47.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.24b68c36.css",
+    "static/js/main.f207eb47.js"
+  ]
+}
