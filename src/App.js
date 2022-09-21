@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { User } from './user';
-import api from '../api';
-import { Status } from './searchStatus';
+import { Users } from './app/components/users';
+import { Status } from './app/components/searchStatus';
+import api from './app/api';
 
-export const Users = () => {
+export function App() {
   const [getUsers, setUsers] = useState(api.users.fetchAll());
   // метод, который удаляет юзеров
   // этот метод вызывается в пропсе в компоненте User
@@ -29,31 +29,12 @@ export const Users = () => {
     setUsers(newState);
   };
   return (
-    <>
-      <Status value={getUsers} />
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Имя</th>
-            <th scope="col">Качества</th>
-            <th scope="col">Професия</th>
-            <th scope="col">Встретился, раз</th>
-            <th scope="col">Оценка</th>
-          </tr>
-        </thead>
-        <tbody>
-          {getUsers.map((item) => {
-            return (
-              <User
-                key={item._id}
-                {...item}
-                onDelete={handleDelete}
-                onMark={handleMark}
-              />
-            );
-          })}
-        </tbody>
-      </table>
-    </>
+    <div>
+      <Users
+        metodDelet={handleDelete}
+        metodHandleMark={handleMark}
+        users={[...getUsers]}
+      />
+    </div>
   );
-};
+}
