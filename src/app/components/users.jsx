@@ -16,6 +16,8 @@ export const Users = (props) => {
             <th scope="col">Професия</th>
             <th scope="col">Встретился, раз</th>
             <th scope="col">Оценка</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
