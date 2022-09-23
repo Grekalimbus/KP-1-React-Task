@@ -3,6 +3,7 @@ import { User } from './user';
 import api from '../api';
 import { Status } from './searchStatus';
 import { Pagination } from './pagination';
+import { Paginate } from '../utils/paginate';
 
 export const Users = (props) => {
   // users - массив из объектов (12)
@@ -12,12 +13,17 @@ export const Users = (props) => {
   // 2 константы для работы с копмонентом pagination, эти константы будут использованы как пропсы
   const count = users.length;
   const pageSize = 4; // количество пользователей, которые будут отображатся на странице
+  const [currentPage, setCurrenPage] = useState(1);
   const handlePageChange = (pageIndex) => {
     console.log('page: ', pageIndex);
+    setCurrenPage(pageIndex);
   };
+
+  const userCrop = Paginate(users, currentPage, pageSize); // Paginate - функция которая режет массив обьекта и оставляет там 4 элемента
+  // начиная с полученного индекса
   return (
     <>
-      <Status value={users} />
+      <Status value={userCrop} />
       <table className="table">
         <thead>
           <tr>
@@ -31,7 +37,7 @@ export const Users = (props) => {
           </tr>
         </thead>
         <tbody>
-          {users.map((item) => {
+          {userCrop.map((item) => {
             return (
               <User
                 key={item._id}
@@ -46,6 +52,7 @@ export const Users = (props) => {
       <Pagination
         itemsCount={count}
         pageSize={pageSize}
+        currentPage={currentPage}
         onPageChange={handlePageChange}
       />
     </>
