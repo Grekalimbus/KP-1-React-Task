@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Status = (props) => {
+const Status = (props) => {
   let valueStatus = props.value.length;
   const numberStatus = () => {
     if (valueStatus > 4 && valueStatus < 15) {
@@ -24,3 +24,5 @@ export const Status = (props) => {
     </h1>
   );
 };
+
+export default Status;

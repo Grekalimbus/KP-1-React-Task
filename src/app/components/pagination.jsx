@@ -1,13 +1,9 @@
 // Пагинация - разделение контента на страницы
 import React from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
-export const Pagination = ({
-  itemsCount,
-  pageSize,
-  onPageChange,
-  currentPage,
-}) => {
+const Pagination = ({ itemsCount, pageSize, onPageChange, currentPage }) => {
   // itemsCount - кол-во итемов/юзеров (12)
   // pageSize - кол во отображаемых итемов на странице
 
@@ -38,3 +34,10 @@ export const Pagination = ({
     </nav>
   );
 };
+Pagination.propTypes = {
+  itemsCount: PropTypes.number.isRequired,
+  pageSize: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
+  currentPage: PropTypes.number.isRequired,
+};
+export default Pagination;

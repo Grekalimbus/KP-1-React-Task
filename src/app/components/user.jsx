@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Qualite } from './qualite';
-import { BookMark } from './bookMark';
-export const User = (props) => {
+import Qualite from './qualite';
+import BookMark from './bookMark';
+const User = (props) => {
   // console.log(props);
   return (
     <tr>
@@ -29,3 +29,5 @@ export const User = (props) => {
     </tr>
   );
 };
+
+export default User;

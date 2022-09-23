@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const BookMark = (props) => {
+const BookMark = (props) => {
   return (
     <button
       className={
@@ -10,3 +10,5 @@ export const BookMark = (props) => {
     ></button>
   );
 };
+
+export default BookMark;

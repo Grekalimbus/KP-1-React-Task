@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { User } from './user';
+import User from './user';
 import api from '../api';
-import { Status } from './searchStatus';
-import { Pagination } from './pagination';
+import Status from './searchStatus';
+import Pagination from './pagination';
 import { Paginate } from '../utils/paginate';
 
 export const Users = (props) => {

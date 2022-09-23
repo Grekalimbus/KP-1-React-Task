@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 // props является объектом {qualit: array}
 // В array будет массив из 3 объектов. чтобы обратится конкретно к массиву (где 3 объекта), нужно указать ключ - это qualit
 //
-export const Qualite = (props) => {
+const Qualite = (props) => {
   //   console.log(props.qualit); //  [{…}, {…}, {…}]
   return (
     <th>
@@ -18,3 +18,5 @@ export const Qualite = (props) => {
     </th>
   );
 };
+
+export default Qualite;
