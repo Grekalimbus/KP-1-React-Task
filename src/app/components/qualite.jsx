@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-
+import React from "react";
+import PropTypes from "prop-types";
 // props является объектом {qualit: array}
 // В array будет массив из 3 объектов. чтобы обратится конкретно к массиву (где 3 объекта), нужно указать ключ - это qualit
-//
-const Qualite = (props) => {
-    //   console.log(props.qualit); //  [{…}, {…}, {…}]
+const Qualite = ({ property }) => {
+    //   console.log(props.qualit); //  [{…}, {…}, {…}]
     return (
         <th>
-            {props.qualit.map((qualite, index) => {
+            {property.map((qualite, index) => {
                 return (
                     <span
                         key={index}
@@ -18,5 +17,7 @@ const Qualite = (props) => {
         </th>
     );
 };
-
+Qualite.propTypes = {
+    property: PropTypes.array.isRequired
+};
 export default Qualite;

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Users } from "./app/components/users";
-import { Status } from "./app/components/searchStatus";
 import api from "./app/api";
 
 export function App() {

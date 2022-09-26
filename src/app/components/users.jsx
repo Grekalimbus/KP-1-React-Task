@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import User from "./user";
-import api from "../api";
 import Status from "./searchStatus";
 import Pagination from "./pagination";
 import { Paginate } from "../utils/paginate";
+import PropTypes from "prop-types";
 
 export const Users = (props) => {
     // users - массив из объектов (12)
@@ -57,4 +57,9 @@ export const Users = (props) => {
             />
         </>
     );
+};
+Users.propTypes = {
+    users: PropTypes.array.isRequired,
+    metodDelet: PropTypes.func.isRequired,
+    metodHandleMark: PropTypes.func.isRequired
 };

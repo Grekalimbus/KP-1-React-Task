@@ -1,7 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const Status = (props) => {
-    let valueStatus = props.value.length;
+const Status = ({ value }) => {
+    const valueStatus = value.length;
     const numberStatus = () => {
         if (valueStatus > 4 && valueStatus < 15) {
             return `${valueStatus} Тусанут с тобой сегодня`;
@@ -27,4 +28,7 @@ const Status = (props) => {
     );
 };
 
+Status.propTypes = {
+    value: PropTypes.array.isRequired
+};
 export default Status;

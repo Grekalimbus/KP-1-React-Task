@@ -1,27 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 import Qualite from "./qualite";
 import BookMark from "./bookMark";
-const User = (props) => {
+import PropTypes from "prop-types";
+const User = ({
+    onDelete,
+    onMark,
+    name,
+    qualities,
+    completedMeetings,
+    rate,
+    bookmark,
+    _id,
+    profession
+}) => {
     // console.log(props);
     return (
         <tr>
-            <th>{props.name}</th>
-            <Qualite qualit={props.qualities} />
-            <th>{props.profession.name}</th>
-            <th>{props.completedMeetings}</th>
-            <th>{`${props.rate}/5`}</th>
+            <th>{name}</th>
+            <Qualite property={qualities} />
+            <th>{profession.name}</th>
+            <th>{completedMeetings}</th>
+            <th>{`${rate}/5`}</th>
             <th>
                 <BookMark
-                    stateMark={props.bookmark}
-                    callingOnMark={props.onMark}
-                    id={props._id}
+                    stateMark={bookmark}
+                    callingOnMark={onMark}
+                    id={_id}
                 />
             </th>
             <th>
                 <button
-                    key={props._id}
+                    key={_id}
                     className={`badge bg-danger mt-2`}
-                    onClick={() => props.onDelete(props._id)}
+                    onClick={() => onDelete(_id)}
                 >
                     Delete
                 </button>
@@ -29,5 +40,15 @@ const User = (props) => {
         </tr>
     );
 };
-
+User.propTypes = {
+    onDelete: PropTypes.func.isRequired,
+    onMark: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    qualities: PropTypes.array.isRequired,
+    completedMeetings: PropTypes.number.isRequired,
+    rate: PropTypes.number.isRequired,
+    bookmark: PropTypes.bool.isRequired,
+    _id: PropTypes.string.isRequired,
+    profession: PropTypes.object.isRequired
+};
 export default User;
