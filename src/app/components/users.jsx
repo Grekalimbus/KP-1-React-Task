@@ -4,6 +4,7 @@ import Status from "./searchStatus";
 import Pagination from "./pagination";
 import { Paginate } from "../utils/paginate";
 import PropTypes from "prop-types";
+import GroupList from "./groupList";
 
 export const Users = (props) => {
     // users - массив из объектов (12)
@@ -23,6 +24,7 @@ export const Users = (props) => {
     // начиная с полученного индекса
     return (
         <>
+            <GroupList />
             <Status value={userCrop} />
             <table className="table">
                 <thead>
