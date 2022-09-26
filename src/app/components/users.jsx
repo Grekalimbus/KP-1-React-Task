@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import User from "./user";
 import Status from "./searchStatus";
 import Pagination from "./pagination";
 import { Paginate } from "../utils/paginate";
 import PropTypes from "prop-types";
 import GroupList from "./groupList";
+import api from "../api";
 
 export const Users = (props) => {
     // users - массив из объектов (12)
@@ -15,16 +16,31 @@ export const Users = (props) => {
     const count = users.length;
     const pageSize = 4; // количество пользователей, которые будут отображатся на странице
     const [currentPage, setCurrenPage] = useState(1);
+    const [professions, setProffesion] = useState();
     const handlePageChange = (pageIndex) => {
         console.log("page: ", pageIndex);
         setCurrenPage(pageIndex);
     };
+    const handleProfessionSelect = (params) => {
+        console.log(params);
+    };
+    // console.log(professions);
+    // хук, который обрабатывает промис и получает данные, после чего вызывается setProffesion, чтобы установить состояние professions
+    // это происходит так потому, что данные приходят не сразу, поэтому состояние устанавливается в этом хуке после того, как пришли данные
+    useEffect(() => {
+        api.professions.fetchAll().then((data) => {
+            return setProffesion(data);
+        });
+    }, []);
 
     const userCrop = Paginate(users, currentPage, pageSize); // Paginate - функция которая режет массив обьекта и оставляет там 4 элемента
     // начиная с полученного индекса
     return (
         <>
-            <GroupList />
+            <GroupList
+                items={professions}
+                onItemSelect={handleProfessionSelect}
+            />
             <Status value={userCrop} />
             <table className="table">
                 <thead>
