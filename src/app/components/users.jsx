@@ -13,16 +13,18 @@ export const Users = (props) => {
     const { users, metodDelet, metodHandleMark } = props;
 
     // 2 константы для работы с копмонентом pagination, эти константы будут использованы как пропсы
-    const count = users.length;
-    const pageSize = 4; // количество пользователей, которые будут отображатся на странице
+
+    const pageSize = 2; // количество пользователей, которые будут отображатся на странице
     const [currentPage, setCurrenPage] = useState(1);
     const [professions, setProffesion] = useState();
+    const [selectedProf, setSelectedProf] = useState();
     const handlePageChange = (pageIndex) => {
         console.log("page: ", pageIndex);
         setCurrenPage(pageIndex);
     };
-    const handleProfessionSelect = (params) => {
-        console.log(params);
+    const handleProfessionSelect = (item) => {
+        setSelectedProf(item);
+        setCurrenPage(1);
     };
     // console.log(professions);
     // хук, который обрабатывает промис и получает данные, после чего вызывается setProffesion, чтобы установить состояние professions
@@ -32,48 +34,69 @@ export const Users = (props) => {
             return setProffesion(data);
         });
     }, []);
-
-    const userCrop = Paginate(users, currentPage, pageSize); // Paginate - функция которая режет массив обьекта и оставляет там 4 элемента
+    const filteredUsers = selectedProf
+        ? users.filter((user) => user.profession === selectedProf)
+        : users;
+    const count = filteredUsers.length;
+    const userCrop = Paginate(filteredUsers, currentPage, pageSize); // Paginate - функция которая режет массив обьекта и оставляет там 4 элемента
     // начиная с полученного индекса
+    const clearfilter = () => {
+        setSelectedProf();
+    };
     return (
-        <>
-            <GroupList
-                items={professions}
-                onItemSelect={handleProfessionSelect}
-            />
-            <Status value={userCrop} />
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Имя</th>
-                        <th scope="col">Качества</th>
-                        <th scope="col">Професия</th>
-                        <th scope="col">Встретился, раз</th>
-                        <th scope="col">Оценка</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {userCrop.map((item) => {
-                        return (
-                            <User
-                                key={item._id}
-                                {...item}
-                                onDelete={metodDelet}
-                                onMark={metodHandleMark}
-                            />
-                        );
-                    })}
-                </tbody>
-            </table>
-            <Pagination
-                itemsCount={count}
-                pageSize={pageSize}
-                currentPage={currentPage}
-                onPageChange={handlePageChange}
-            />
-        </>
+        <div className="d-flex">
+            {professions && (
+                <div className="d-flex flex-column flex-shrink-0 p-3">
+                    <GroupList
+                        selectedItem={selectedProf}
+                        items={professions}
+                        onItemSelect={handleProfessionSelect}
+                    />
+                    <button
+                        className="btn btn-secondary mt-2"
+                        onClick={clearfilter}
+                    >
+                        Очистить
+                    </button>
+                </div>
+            )}
+            <div className="d-flex flex-column">
+                <Status value={users} />
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Имя</th>
+                            <th scope="col">Качества</th>
+                            <th scope="col">Професия</th>
+                            <th scope="col">Встретился, раз</th>
+                            <th scope="col">Оценка</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {userCrop.map((item) => {
+                            return (
+                                <User
+                                    key={item._id}
+                                    {...item}
+                                    onDelete={metodDelet}
+                                    onMark={metodHandleMark}
+                                />
+                            );
+                        })}
+                    </tbody>
+                </table>
+                <div className="d-flex justify-content-center">
+                    <Pagination
+                        itemsCount={count}
+                        pageSize={pageSize}
+                        currentPage={currentPage}
+                        onPageChange={handlePageChange}
+                    />
+                </div>
+            </div>
+        </div>
     );
 };
 Users.propTypes = {
