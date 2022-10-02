@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Users } from "./app/components/users";
 import api from "./app/api";
 
 export function App() {
-    const [getUsers, setUsers] = useState(api.users.fetchAll());
+    const [getUsers, setUsers] = useState();
+    useEffect(() => {
+        api.users.fetchAll().then((users) => {
+            return setUsers(users);
+        });
+    }, []);
     // метод, который удаляет юзеров
     // этот метод вызывается в пропсе в компоненте User
     const handleDelete = (userId) => {
@@ -27,13 +32,15 @@ export function App() {
         }
         setUsers(newState);
     };
-    return (
-        <div>
-            <Users
-                metodDelet={handleDelete}
-                metodHandleMark={handleMark}
-                users={[...getUsers]}
-            />
-        </div>
-    );
+    if (getUsers) {
+        return (
+            <div>
+                <Users
+                    metodDelet={handleDelete}
+                    metodHandleMark={handleMark}
+                    users={[...getUsers]}
+                />
+            </div>
+        );
+    }
 }
