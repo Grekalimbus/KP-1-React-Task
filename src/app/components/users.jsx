@@ -10,7 +10,7 @@ import api from "../api";
 export const Users = (props) => {
     // users - массив из объектов (12)
     // metodDelet/metodHandleMark - пропсы, в которых методы из файла App.js
-    const { users, metodDelet, metodHandleMark } = props;
+    const { users, methodDelete, methodHandleMark } = props;
 
     // 2 константы для работы с копмонентом pagination, эти константы будут использованы как пропсы
 
@@ -80,8 +80,8 @@ export const Users = (props) => {
                                 <User
                                     key={item._id}
                                     {...item}
-                                    onDelete={metodDelet}
-                                    onMark={metodHandleMark}
+                                    onDelete={methodDelete}
+                                    onMark={methodHandleMark}
                                 />
                             );
                         })}
@@ -101,6 +101,6 @@ export const Users = (props) => {
 };
 Users.propTypes = {
     users: PropTypes.array.isRequired,
-    metodDelet: PropTypes.func.isRequired,
-    metodHandleMark: PropTypes.func.isRequired
+    methodDelete: PropTypes.func.isRequired,
+    methodHandleMark: PropTypes.func.isRequired
 };

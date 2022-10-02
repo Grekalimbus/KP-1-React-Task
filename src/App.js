@@ -36,8 +36,8 @@ export function App() {
         return (
             <div>
                 <Users
-                    metodDelet={handleDelete}
-                    metodHandleMark={handleMark}
+                    methodDelete={handleDelete}
+                    methodHandleMark={handleMark}
                     users={[...getUsers]}
                 />
             </div>
