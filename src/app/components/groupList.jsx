@@ -8,11 +8,11 @@ const GroupList = ({
     onItemSelect,
     selectedItem
 }) => {
-    console.log(items);
-    return (
-        <ul className="list-group">
-            {Object.keys(items).map((item) => {
-                return (
+    // Рендер для объекта
+    if (!Array.isArray(items)) {
+        return (
+            <ul className="list-group">
+                {Object.keys(items).map((item) => (
                     <li
                         key={items[item][valueProperty]}
                         className={
@@ -24,8 +24,26 @@ const GroupList = ({
                     >
                         {items[item][contentProperty]}
                     </li>
-                );
-            })}
+                ))}
+            </ul>
+        );
+    }
+    // рендер для массива
+    return (
+        <ul className="list-group">
+            {items.map((item) => (
+                <li
+                    key={item[valueProperty]}
+                    className={
+                        "list-group-item" +
+                        (item === selectedItem ? " active" : "")
+                    }
+                    onClick={() => onItemSelect(item)}
+                    role="button"
+                >
+                    {item[contentProperty]}
+                </li>
+            ))}
         </ul>
     );
 };

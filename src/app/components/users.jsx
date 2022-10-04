@@ -16,7 +16,9 @@ export const Users = (props) => {
 
     const pageSize = 2; // количество пользователей, которые будут отображатся на странице
     const [currentPage, setCurrenPage] = useState(1);
+    // professions - массив из объектов профессий (6шт) / [{},{},...]
     const [professions, setProffesion] = useState();
+    // selectedProf - объект одной из професии / { _id: "67rdca3eeb7f6fgeed471818", name: "Доктор" }
     const [selectedProf, setSelectedProf] = useState();
     const handlePageChange = (pageIndex) => {
         console.log("page: ", pageIndex);
@@ -26,7 +28,6 @@ export const Users = (props) => {
         setSelectedProf(item);
         setCurrenPage(1);
     };
-    // console.log(professions);
     // хук, который обрабатывает промис и получает данные, после чего вызывается setProffesion, чтобы установить состояние professions
     // это происходит так потому, что данные приходят не сразу, поэтому состояние устанавливается в этом хуке после того, как пришли данные
     useEffect(() => {
@@ -34,6 +35,7 @@ export const Users = (props) => {
             return setProffesion(data);
         });
     }, []);
+
     const filteredUsers = selectedProf
         ? users.filter((user) => user.profession._id === selectedProf._id)
         : users;
