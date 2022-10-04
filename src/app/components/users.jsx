@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import User from "./user";
+import UserTabel from "./userTabel";
 import Status from "./searchStatus";
 import Pagination from "./pagination";
 import { Paginate } from "../utils/paginate";
@@ -64,31 +64,11 @@ export const Users = (props) => {
             )}
             <div className="d-flex flex-column">
                 <Status value={users} />
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Имя</th>
-                            <th scope="col">Качества</th>
-                            <th scope="col">Професия</th>
-                            <th scope="col">Встретился, раз</th>
-                            <th scope="col">Оценка</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {userCrop.map((item) => {
-                            return (
-                                <User
-                                    key={item._id}
-                                    {...item}
-                                    onDelete={methodDelete}
-                                    onMark={methodHandleMark}
-                                />
-                            );
-                        })}
-                    </tbody>
-                </table>
+                <UserTabel
+                    users={userCrop}
+                    onMark={methodHandleMark}
+                    onDelete={methodDelete}
+                />
                 <div className="d-flex justify-content-center">
                     <Pagination
                         itemsCount={count}
