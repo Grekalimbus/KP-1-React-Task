@@ -81,7 +81,7 @@ export const Users = (props) => {
                     onMark={methodHandleMark}
                     onDelete={methodDelete}
                     onSort={handleSort}
-                    currentSort={sortBy}
+                    selectedSort={sortBy}
                 />
                 <div className="d-flex justify-content-center">
                     <Pagination

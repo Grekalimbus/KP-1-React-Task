@@ -1,47 +1,24 @@
 import React from "react";
 import User from "./user";
 import PropTypes from "prop-types";
+import TableHeader from "./tableHeader";
 
-const UserTabel = ({ users, onDelete, onMark, currentSort, onSort }) => {
-    const handleSort = (item) => {
-        if (currentSort.iter === item) {
-            onSort({
-                ...currentSort,
-                order: currentSort.order === "asc" ? "desc" : "asc"
-            });
-        } else {
-            onSort({ iter: item, order: "asc" });
-        }
+const UserTabel = ({ users, onDelete, onMark, selectedSort, onSort }) => {
+    const columns = {
+        name: { iter: "name", name: "Имя" },
+        qualities: { name: "Качества" },
+        professions: { iter: "profession.name", name: "Профессия" },
+        completedMeetings: {
+            iter: "completedMeetings",
+            name: "Встретился раз"
+        },
+        rate: { iter: "rate", name: "Оценка" },
+        bookmark: { iter: "bookmark", name: "Избранное" },
+        delete: {}
     };
     return (
         <table className="table">
-            <thead>
-                <tr>
-                    <th onClick={() => handleSort("name")} scope="col">
-                        Имя
-                    </th>
-                    <th scope="col">Качества</th>
-                    <th
-                        onClick={() => handleSort("profession.name")}
-                        scope="col"
-                    >
-                        Професия
-                    </th>
-                    <th
-                        onClick={() => handleSort("completedMeetings")}
-                        scope="col"
-                    >
-                        Встретился, раз
-                    </th>
-                    <th onClick={() => handleSort("rate")} scope="col">
-                        Оценка
-                    </th>
-                    <th onClick={() => handleSort("bookmark")} scope="col">
-                        Избранное
-                    </th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
+            <TableHeader {...{ onSort, selectedSort, columns }} />
             <tbody>
                 {users.map((item) => {
                     return (
@@ -62,6 +39,6 @@ UserTabel.propTypes = {
     onDelete: PropTypes.func.isRequired,
     onMark: PropTypes.func.isRequired,
     onSort: PropTypes.func.isRequired,
-    currentSort: PropTypes.object.isRequired
+    selectedSort: PropTypes.object.isRequired
 };
 export default UserTabel;
