@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const Qualite = ({ property }) => {
     //   console.log(props.qualit); //  [{…}, {…}, {…}]
     return (
-        <th>
+        <>
             {property.map((qualite, index) => {
                 return (
                     <span
@@ -14,7 +14,7 @@ const Qualite = ({ property }) => {
                     >{`${qualite.name} `}</span>
                 );
             })}
-        </th>
+        </>
     );
 };
 Qualite.propTypes = {
