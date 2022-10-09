@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TableHeader from "./tableHeader";
-import TableBody from "./tableBody";
 import BookMark from "./bookMark";
 import Qualite from "./qualite";
+import Table from "./table";
+
 const UserTabel = ({ users, onDelete, onMark, selectedSort, onSort }) => {
     const columns = {
         name: { path: "name", name: "Имя" },
@@ -40,22 +40,12 @@ const UserTabel = ({ users, onDelete, onMark, selectedSort, onSort }) => {
         }
     };
     return (
-        <table className="table">
-            <TableHeader {...{ onSort, selectedSort, columns }} />
-            <TableBody {...{ columns, data: users }} />
-            {/* <tbody>
-                {users.map((item) => {
-                    return (
-                        <User
-                            key={item._id}
-                            {...item}
-                            onDelete={onDelete}
-                            onMark={onMark}
-                        />
-                    );
-                })}
-            </tbody> */}
-        </table>
+        <Table
+            onSort={onSort}
+            selectedSort={selectedSort}
+            columns={columns}
+            data={users}
+        />
     );
 };
 UserTabel.propTypes = {
