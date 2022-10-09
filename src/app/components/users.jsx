@@ -54,7 +54,7 @@ export const Users = (props) => {
         : users;
     const count = filteredUsers.length;
     // сортировка с помощью lodash
-    const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
+    const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order]);
     const userCrop = Paginate(sortedUsers, currentPage, pageSize); // Paginate - функция которая режет массив обьекта и оставляет там 4 элемента
 
     return (

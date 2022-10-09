@@ -3,6 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
+import BookMark from "./bookMark";
 const UserTabel = ({ users, onDelete, onMark, selectedSort, onSort }) => {
     const columns = {
         name: { path: "name", name: "Имя" },
@@ -13,8 +14,27 @@ const UserTabel = ({ users, onDelete, onMark, selectedSort, onSort }) => {
             name: "Встретился раз"
         },
         rate: { path: "rate", name: "Оценка" },
-        bookmark: { path: "bookmark", name: "Избранное" },
-        delete: {}
+        bookmark: {
+            path: "bookmark",
+            name: "Избранное",
+            component: (user) => (
+                <BookMark
+                    stateMark={user.bookmark}
+                    callingOnMark={onMark}
+                    id={user._id}
+                />
+            )
+        },
+        delete: {
+            component: (user) => (
+                <button
+                    className={`badge bg-danger mt-2`}
+                    onClick={() => onDelete(user._id)}
+                >
+                    Delete
+                </button>
+            )
+        }
     };
     return (
         <table className="table">
