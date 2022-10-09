@@ -1,5 +1,4 @@
 import React from "react";
-// import User from "./user";
 import PropTypes from "prop-types";
 import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
