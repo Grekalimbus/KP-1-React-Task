@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 // props является объектом {qualit: array}
 // В array будет массив из 3 объектов. чтобы обратится конкретно к массиву (где 3 объекта), нужно указать ключ - это qualit
-const Qualite = ({ property }) => {
+const Quality = ({ property }) => {
     //   console.log(props.qualit); //  [{…}, {…}, {…}]
     return (
         <>
@@ -17,7 +17,7 @@ const Qualite = ({ property }) => {
         </>
     );
 };
-Qualite.propTypes = {
+Quality.propTypes = {
     property: PropTypes.array.isRequired
 };
-export default Qualite;
+export default Quality;

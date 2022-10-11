@@ -1,15 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import BookMark from "./bookMark";
-import Qualite from "./qualite";
+import Quality from "./quality";
 import Table from "./table";
 
-const UserTabel = ({ users, onDelete, onMark, selectedSort, onSort }) => {
+const UserTable = ({ users, onDelete, onMark, selectedSort, onSort }) => {
     const columns = {
         name: { path: "name", name: "Имя" },
         qualities: {
             name: "Качества",
-            component: (user) => <Qualite property={user.qualities} />
+            component: (user) => <Quality property={user.qualities} />
         },
         professions: { path: "profession.name", name: "Профессия" },
         completedMeetings: {
@@ -48,11 +48,11 @@ const UserTabel = ({ users, onDelete, onMark, selectedSort, onSort }) => {
         />
     );
 };
-UserTabel.propTypes = {
+UserTable.propTypes = {
     users: PropTypes.array.isRequired,
     onDelete: PropTypes.func.isRequired,
     onMark: PropTypes.func.isRequired,
     onSort: PropTypes.func.isRequired,
     selectedSort: PropTypes.object.isRequired
 };
-export default UserTabel;
+export default UserTable;

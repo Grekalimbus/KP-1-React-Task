@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import UserTabel from "./userTabel";
+import UserTable from "./userTable";
 import Status from "./searchStatus";
 import Pagination from "./pagination";
 import { Paginate } from "../utils/paginate";
-
 import GroupList from "./groupList";
 import api from "../api";
 import _ from "lodash";
@@ -105,7 +104,7 @@ export const Users = () => {
                 )}
                 <div className="d-flex flex-column">
                     <Status value={getUsers} />
-                    <UserTabel
+                    <UserTable
                         users={userCrop}
                         onMark={handleMark}
                         onDelete={handleDelete}
