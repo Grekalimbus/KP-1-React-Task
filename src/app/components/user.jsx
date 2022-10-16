@@ -31,6 +31,6 @@ const User = ({ currentUser }) => {
 };
 
 User.propTypes = {
-    currentUser: PropTypes.object.isRequired
+    currentUser: PropTypes.object
 };
 export default User;

@@ -47,10 +47,14 @@ export const Users = () => {
     }, []);
     // хук, в котором вызывается getById(сортировка юзеров по id, которое в url. например: 67rdca3eeb7f6fgeed471815)
     useEffect(() => {
-        api.users.getById(userId).then((user) => {
-            return setCurrentUser(user);
-        });
-    }, []);
+        if (userId) {
+            api.users.getById(userId).then((user) => {
+                return setCurrentUser(user);
+            });
+        } else {
+            setCurrentUser();
+        }
+    }, [userId]);
     // метод, который удаляет юзеров
     // этот метод вызывается в пропсе в компоненте User
     const handleDelete = (userId) => {
