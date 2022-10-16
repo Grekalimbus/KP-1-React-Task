@@ -10,7 +10,7 @@ export function App() {
         <div>
             <NavBar />
             <Switch>
-                <Route path="/users" component={Users} />
+                <Route path="/users/:userId?" component={Users} />
                 <Route path="/main" component={MainPage} />
                 <Route path="/login" component={Login} />
             </Switch>

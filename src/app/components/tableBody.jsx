@@ -25,7 +25,7 @@ const TableBody = ({ data, columns }) => {
                     {Object.keys(columns).map((column) =>
                         columns[column].path === "name" ? (
                             <td key={column}>
-                                <Link to="/">
+                                <Link to={`/users/${item._id}`}>
                                     {renderContent(item, column)}
                                 </Link>
                             </td>

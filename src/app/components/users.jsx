@@ -6,8 +6,12 @@ import { Paginate } from "../utils/paginate";
 import GroupList from "./groupList";
 import api from "../api";
 import _ from "lodash";
+import { useParams } from "react-router-dom";
+import User from "./user";
 
 export const Users = () => {
+    const { userId } = useParams();
+    // console.log(userId);
     const pageSize = 8; // количество пользователей, которые будут отображатся на странице
     // состояния
     const [currentPage, setCurrenPage] = useState(1);
@@ -15,10 +19,11 @@ export const Users = () => {
     const [selectedProf, setSelectedProf] = useState();
     const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
     const [getUsers, setUsers] = useState();
+    const [currentUser, setCurrentUser] = useState();
     // методы
     // метод для пагинации
     const handlePageChange = (pageIndex) => {
-        console.log("page: ", pageIndex);
+        // console.log("page: ", pageIndex);
         setCurrenPage(pageIndex);
     };
     // метод для груп листа
@@ -38,6 +43,12 @@ export const Users = () => {
     useEffect(() => {
         api.users.fetchAll().then((users) => {
             return setUsers(users);
+        });
+    }, []);
+    // хук, в котором вызывается getById(сортировка юзеров по id, которое в url. например: 67rdca3eeb7f6fgeed471815)
+    useEffect(() => {
+        api.users.getById(userId).then((user) => {
+            return setCurrentUser(user);
         });
     }, []);
     // метод, который удаляет юзеров
@@ -71,6 +82,9 @@ export const Users = () => {
         });
     }, []);
     if (getUsers !== undefined) {
+        if (userId !== undefined) {
+            return <User currentUser={currentUser} />;
+        }
         const filteredUsers = selectedProf
             ? getUsers.filter(
                   (user) => user.profession._id === selectedProf._id
@@ -123,5 +137,6 @@ export const Users = () => {
             </div>
         );
     }
+
     return "loading...";
 };
