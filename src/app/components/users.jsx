@@ -8,6 +8,7 @@ import api from "../api";
 import _ from "lodash";
 import { useParams } from "react-router-dom";
 import User from "./user";
+import SearchUser from "./searchUser";
 
 export const Users = () => {
     const { userId } = useParams();
@@ -20,7 +21,11 @@ export const Users = () => {
     const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
     const [getUsers, setUsers] = useState();
     const [currentUser, setCurrentUser] = useState();
+    const [inputValue, setInputValue] = useState("");
     // методы
+    const handleInputChange = ({ target }) => {
+        setInputValue(target.value);
+    };
     // метод для пагинации
     const handlePageChange = (pageIndex) => {
         // console.log("page: ", pageIndex);
@@ -101,7 +106,7 @@ export const Users = () => {
             [sortBy.path],
             [sortBy.order]
         );
-        const userCrop = Paginate(sortedUsers, currentPage, pageSize); // Paginate - функция которая режет массив обьекта и оставляет там 4 элемента
+        const userCrop = Paginate(sortedUsers, currentPage, pageSize); // Paginate - функция которая режет массив обьекта и оставляет там x элемента
 
         return (
             <div className="d-flex">
@@ -122,6 +127,10 @@ export const Users = () => {
                 )}
                 <div className="d-flex flex-column">
                     <Status value={getUsers} />
+                    <SearchUser
+                        value={inputValue}
+                        onChange={handleInputChange}
+                    />
                     <UserTable
                         users={userCrop}
                         onMark={handleMark}
