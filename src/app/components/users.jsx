@@ -35,6 +35,7 @@ export const Users = () => {
     // метод для груп листа
     const handleProfessionSelect = (item) => {
         setSelectedProf(item);
+        setInputValue("");
         setCurrenPage(1);
     };
     // метод для сбрасывания состояния selectedProf
