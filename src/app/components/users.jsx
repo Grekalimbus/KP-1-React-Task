@@ -24,6 +24,7 @@ export const Users = () => {
     const [inputValue, setInputValue] = useState("");
     // методы
     const handleInputChange = ({ target }) => {
+        clearfilter();
         setInputValue(target.value);
     };
     // метод для пагинации
@@ -99,6 +100,11 @@ export const Users = () => {
                   (user) => user.profession._id === selectedProf._id
               )
             : getUsers;
+        const inputFilteredUsers = inputValue
+            ? getUsers.filter((user) =>
+                  user.name.toLowerCase().includes(inputValue)
+              )
+            : getUsers;
         const count = filteredUsers.length;
         // сортировка с помощью lodash
         const sortedUsers = _.orderBy(
@@ -106,7 +112,10 @@ export const Users = () => {
             [sortBy.path],
             [sortBy.order]
         );
-        const userCrop = Paginate(sortedUsers, currentPage, pageSize); // Paginate - функция которая режет массив обьекта и оставляет там x элемента
+
+        const userCrop = inputValue
+            ? Paginate(inputFilteredUsers, currentPage, pageSize)
+            : Paginate(sortedUsers, currentPage, pageSize); // Paginate - функция которая режет массив обьекта и оставляет там x элемента
 
         return (
             <div className="d-flex">
@@ -140,7 +149,7 @@ export const Users = () => {
                     />
                     <div className="d-flex justify-content-center">
                         <Pagination
-                            itemsCount={count}
+                            itemsCount={inputValue ? userCrop.length : count}
                             pageSize={pageSize}
                             currentPage={currentPage}
                             onPageChange={handlePageChange}
