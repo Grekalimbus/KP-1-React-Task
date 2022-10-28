@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import BookMark from "./bookMark";
+import BookMark from "../common/bookMark";
 import Quality from "./quality";
-import Table from "./table";
+import Table, { TableBody, TableHeader } from "../common/table";
 
 const UserTable = ({ users, onDelete, onMark, selectedSort, onSort }) => {
     const columns = {
