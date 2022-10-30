@@ -20,6 +20,7 @@ module.exports = {
         ],
         // Использование двойных кавычек
         quotes: ["error", "double", { allowTemplateLiterals: true }],
-        "multiline-ternary": "off"
+        "multiline-ternary": "off",
+        "no-useless-return": "off"
     }
 };
