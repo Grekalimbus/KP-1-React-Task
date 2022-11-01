@@ -16,8 +16,12 @@ const SelectField = ({
                   value: options[optionName]._id
               }))
             : options;
+
     const getInputClasses = () => {
         return "form-select" + (error ? " is-invalid" : "");
+    };
+    const handleChange = ({ target }) => {
+        onChange({ name: target.name, value: target.value });
     };
     return (
         <div className="mb-4">
@@ -28,7 +32,7 @@ const SelectField = ({
                 className={getInputClasses()}
                 id="validationCustom04"
                 value={value}
-                onChange={onChange}
+                onChange={handleChange}
                 name="profession"
             >
                 <option disabled value="">
@@ -36,7 +40,7 @@ const SelectField = ({
                 </option>
                 {optionsArray &&
                     optionsArray.map((option) => (
-                        <option key={option._id} value={option.name}>
+                        <option key={option.value} value={option.name}>
                             {option.name}
                         </option>
                     ))}
