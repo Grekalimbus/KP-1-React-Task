@@ -12,7 +12,6 @@ const MultiSelectField = ({ options, onChange, name, label }) => {
             : options;
     const handleChange = (value) => {
         onChange({ name: name, value });
-        console.log({ name: name, value });
     };
 
     return (
