@@ -11,8 +11,7 @@ import User from "../userPage/user";
 import SearchUser from "../../common/searchUser";
 
 const UsersList = () => {
-    const { userId } = useParams();
-    // console.log(userId);
+    const { userId, edit } = useParams();
     const pageSize = 8; // количество пользователей, которые будут отображатся на странице
     // состояния
     const [currentPage, setCurrenPage] = useState(1);
@@ -94,7 +93,7 @@ const UsersList = () => {
     }, []);
     if (getUsers !== undefined) {
         if (userId !== undefined) {
-            return <User currentUser={currentUser} />;
+            return <User currentUser={currentUser} edit={edit} />;
         }
         const filteredUsers = selectedProf
             ? getUsers.filter(

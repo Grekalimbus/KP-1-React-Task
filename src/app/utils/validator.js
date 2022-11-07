@@ -30,6 +30,10 @@ export function validator(data, config) {
                 statusValidate = data.length < config.value;
                 break;
             }
+            case "isSurname": {
+                statusValidate = data.trim().includes(" ") === false;
+                break;
+            }
             default:
                 break;
         }
