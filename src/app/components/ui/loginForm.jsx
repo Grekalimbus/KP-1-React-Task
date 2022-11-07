@@ -78,7 +78,7 @@ const LoginForm = () => {
                 onChange={handleChange}
                 name="stayOn"
             >
-                <a>Оставаться в системе</a>
+                Оставаться в системе
             </CheckBoxField>
             <button
                 type="submit"

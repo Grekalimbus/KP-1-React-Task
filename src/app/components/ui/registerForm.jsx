@@ -76,6 +76,12 @@ const RegisterForm = () => {
             isRequired: {
                 message: "Обязательно выберете профессию"
             }
+        },
+        licence: {
+            isRequired: {
+                message:
+                    "Вы не можете использовать наш сервиз без использования лицензионног соглашения"
+            }
         }
     };
     return (
@@ -104,6 +110,7 @@ const RegisterForm = () => {
                 error={errors.profession}
                 value={data.profession}
                 label="Выберите вашу профессию"
+                name="professions"
             />
             <RadioField
                 options={[
@@ -119,14 +126,17 @@ const RegisterForm = () => {
                 options={qualities}
                 onChange={handleChange}
                 name="qualities"
+                defaultValue={data.qualities}
                 label="Выберите ваши качества"
             />
             <CheckBoxField
                 value={data.licence}
                 onChange={handleChange}
-                name="locence"
-                label="Подтвердить лицензионное соглашение"
-            />
+                name="licence"
+                error={errors.licence}
+            >
+                Подтвердить <a>лицензионное соглашение</a>
+            </CheckBoxField>
 
             <button
                 type="submit"
