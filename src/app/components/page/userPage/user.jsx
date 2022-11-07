@@ -30,7 +30,7 @@ const User = ({ currentUser, edit }) => {
                 </div>
             );
         } else {
-            return <ChangeUser />;
+            return <ChangeUser user={currentUser} />;
         }
     }
     return "Loading...";

@@ -5,14 +5,19 @@ import api from "../../api";
 import SelectField from "../common/form/selectField";
 import RadioField from "../common/form/radioField";
 import MultiSelectField from "../common/form/multiSelectField";
+import PropTypes from "prop-types";
 
-const ChangeUserForm = () => {
+const ChangeUserForm = ({ user }) => {
+    const qualitiesUser = [];
+    user.qualities.forEach((user) => {
+        qualitiesUser.push({ label: user.name, value: user._id });
+    });
     const [data, setData] = useState({
-        name: "",
-        email: "",
-        profession: "",
+        name: user.name,
+        email: user.email,
+        profession: user.profession.name,
         sex: "male",
-        qualities: []
+        qualities: qualitiesUser
     });
 
     const [errors, setErrors] = useState({});
@@ -100,7 +105,7 @@ const ChangeUserForm = () => {
                             error={errors.profession}
                             value={data.profession}
                             label="Выберите вашу профессию"
-                            name="professions"
+                            name="profession"
                         />
                         <RadioField
                             options={[
@@ -131,6 +136,10 @@ const ChangeUserForm = () => {
             </div>
         </div>
     );
+};
+
+ChangeUserForm.propTypes = {
+    user: PropTypes.object
 };
 
 export default ChangeUserForm;
