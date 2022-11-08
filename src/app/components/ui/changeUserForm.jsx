@@ -9,6 +9,9 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 
 const ChangeUserForm = ({ user }) => {
+    useEffect(() => {
+        console.log(user);
+    }, [user]);
     const history = useHistory();
     const qualitiesUser = [];
     user.qualities.forEach((user) => {
@@ -35,11 +38,6 @@ const ChangeUserForm = ({ user }) => {
     useEffect(() => {
         validate();
     }, [data]);
-    // метод, который перенаправляет пользователя по данному url
-    const handleBackPage = () => {
-        changeDataUser();
-        history.replace(`/users/${user._id}`);
-    };
     const handleChange = (target) => {
         setData((prevState) => ({
             ...prevState,
@@ -71,7 +69,14 @@ const ChangeUserForm = ({ user }) => {
             return u._id === user._id;
         });
         allUsers[indexUser] = dataUser;
+        user = dataUser;
         localStorage.setItem("users", JSON.stringify(allUsers));
+    };
+    // метод, который перенаправляет пользователя по данному url
+    const handleBackPage = () => {
+        changeDataUser();
+        history.replace(`/users/${user._id}`);
+        location.reload();
     };
     const validate = () => {
         const errors = validator(data, validatorConfig);
