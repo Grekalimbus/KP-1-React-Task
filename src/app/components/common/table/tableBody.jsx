@@ -4,7 +4,6 @@ import _ from "lodash";
 import { Link } from "react-router-dom";
 
 const TableBody = ({ data, columns }) => {
-    // console.log(columns);
     const renderContent = (item, column) => {
         if (columns[column].component) {
             const component = columns[column].component;
@@ -15,9 +14,6 @@ const TableBody = ({ data, columns }) => {
         }
         return _.get(item, columns[column].path);
     };
-    // const logItem = (user) => {
-    //     console.log(user);
-    // };
     return (
         <tbody>
             {data.map((item) => (

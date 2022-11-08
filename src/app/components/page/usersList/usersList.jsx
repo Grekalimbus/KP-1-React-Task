@@ -45,7 +45,6 @@ const UsersList = () => {
     const handleSort = (item) => {
         setSortBy(item);
     };
-    // console.log(getUsers);
     useEffect(() => {
         api.users.fetchAll().then((users) => {
             return setUsers(users);
@@ -62,7 +61,6 @@ const UsersList = () => {
         }
     }, [userId]);
     // метод, который удаляет юзеров
-    // этот метод вызывается в пропсе в компоненте User
     const handleDelete = (userId) => {
         setUsers(
             getUsers.filter((item) => {
