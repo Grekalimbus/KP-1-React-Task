@@ -6,8 +6,10 @@ import SelectField from "../common/form/selectField";
 import RadioField from "../common/form/radioField";
 import MultiSelectField from "../common/form/multiSelectField";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
 
 const ChangeUserForm = ({ user }) => {
+    const history = useHistory();
     const qualitiesUser = [];
     user.qualities.forEach((user) => {
         qualitiesUser.push({ label: user.name, value: user._id });
@@ -19,7 +21,9 @@ const ChangeUserForm = ({ user }) => {
         sex: "male",
         qualities: qualitiesUser
     });
-
+    const handleBackPage = () => {
+        history.replace(`/users/${user._id}`);
+    };
     const [errors, setErrors] = useState({});
     const [profession, setProffesion] = useState();
     const [qualities, setQualities] = useState({});
@@ -128,8 +132,11 @@ const ChangeUserForm = ({ user }) => {
                             type="submit"
                             className="btn btn-primary w-100 mx-auto"
                             disabled={!isValid}
+                            onClick={() => {
+                                handleBackPage();
+                            }}
                         >
-                            Submit
+                            Обновить
                         </button>
                     </form>
                 </div>

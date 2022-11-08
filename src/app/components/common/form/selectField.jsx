@@ -24,7 +24,6 @@ const SelectField = ({
     const handleChange = ({ target }) => {
         onChange({ name: target.name, value: target.value });
     };
-    console.log(optionsArray);
     return (
         <div className="mb-4">
             <label htmlFor={name} className="form-label">
