@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
 import CheckBoxField from "../common/form/checkBoxField";
+
 const LoginForm = () => {
     const [data, setData] = useState({
         email: "",
@@ -15,7 +16,31 @@ const LoginForm = () => {
             [target.name]: target.value
         }));
     };
-
+    const validatorConfig = {
+        email: {
+            isRequired: {
+                message: "Электронная почта обязательна для заполнения"
+            },
+            isEmail: {
+                message: "Email введен некорректно"
+            }
+        },
+        password: {
+            isRequired: {
+                message: "Пароль обязателен для заполнения"
+            },
+            isCapitalSymbol: {
+                message: "Пароль должен содержать хотя бы одну заглавную букву"
+            },
+            isContainDigit: {
+                message: "Пароль должен содержать хотя бы одно число"
+            },
+            min: {
+                message: "Пароль должен состоять минимум из 8 символов",
+                value: 8
+            }
+        }
+    };
     useEffect(() => {
         validate();
     }, [data]);
@@ -25,50 +50,26 @@ const LoginForm = () => {
         return Object.keys(errors).length === 0;
     };
     const isValid = Object.keys(errors).length === 0;
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        // 2 строки ниже закоментированы пока что, т.к с ними код не работает из-за линтера, но в уроке код был таким.
-        // const isValid = validate();
-        // if (!isValid) return;
-    };
-    const validatorConfig = {
-        email: {
-            isRequired: {
-                message: "Электронная почта обязательна для заполнения"
-            },
-            isEmail: {
-                message: "Email Введен не коректно"
-            }
-        },
-        password: {
-            isRequired: { message: "Пороль обязателен для заполнения" },
-            isCapitalSymbol: {
-                message: "пароль должен содержать минимум 1 заглавную букву"
-            },
-            isContainDigit: {
-                message: "пароль должен содержать минимум 1 цифру"
-            },
-            min: {
-                message: "пароль должен состоять минимум из 8 цифр",
-                value: 8
-            }
-        }
+        const isValid = validate();
+        if (!isValid) return;
+        console.log(data);
     };
     return (
         <form onSubmit={handleSubmit}>
             <TextField
-                id="email"
-                name="email"
                 label="Электронная почта"
+                name="email"
                 value={data.email}
                 onChange={handleChange}
                 error={errors.email}
             />
             <TextField
-                type="password"
-                id="password"
-                name="password"
                 label="Пароль"
+                type="password"
+                name="password"
                 value={data.password}
                 onChange={handleChange}
                 error={errors.password}
@@ -81,8 +82,8 @@ const LoginForm = () => {
                 Оставаться в системе
             </CheckBoxField>
             <button
-                type="submit"
                 className="btn btn-primary w-100 mx-auto"
+                type="submit"
                 disabled={!isValid}
             >
                 Submit

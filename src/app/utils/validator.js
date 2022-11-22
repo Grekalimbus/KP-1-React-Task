@@ -12,12 +12,12 @@ export function validator(data, config) {
                 break;
             }
             case "isEmail": {
-                const emailRegExp = /^\S+@\S+\.\S+$/g; // проверка для текст@mail.domen
+                const emailRegExp = /^\S+@\S+\.\S+$/g;
                 statusValidate = !emailRegExp.test(data);
                 break;
             }
             case "isCapitalSymbol": {
-                const capitalRegExp = /[A-Z]+/g; // проверка на заглавную букву
+                const capitalRegExp = /[A-Z]+/g;
                 statusValidate = !capitalRegExp.test(data);
                 break;
             }
@@ -30,10 +30,6 @@ export function validator(data, config) {
                 statusValidate = data.length < config.value;
                 break;
             }
-            case "isSurname": {
-                statusValidate = data.trim().includes(" ") === false;
-                break;
-            }
             default:
                 break;
         }
@@ -42,9 +38,9 @@ export function validator(data, config) {
     for (const fieldName in data) {
         for (const validateMethod in config[fieldName]) {
             const error = validate(
-                validateMethod, // isRequired
-                data[fieldName], // email or password
-                config[fieldName][validateMethod] // message
+                validateMethod,
+                data[fieldName],
+                config[fieldName][validateMethod]
             );
             if (error && !errors[fieldName]) {
                 errors[fieldName] = error;

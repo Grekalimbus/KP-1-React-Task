@@ -1,34 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-const Status = ({ value }) => {
-    const valueStatus = value.length;
-    const numberStatus = () => {
-        if (valueStatus > 4 && valueStatus < 15) {
-            return `${valueStatus} Тусанут с тобой сегодня`;
+const SearchStatus = ({ length }) => {
+    const renderPhrase = (number) => {
+        const lastOne = Number(number.toString().slice(-1));
+        if (number > 4 && number < 15) {
+            return "человек тусанет";
         }
-        if (
-            valueStatus === 4 ||
-            valueStatus === 3 ||
-            valueStatus === 2 ||
-            valueStatus === 1
-        ) {
-            return `${valueStatus} Тусананет с тобой сегодня`;
-        }
-        if (valueStatus === 0) {
-            return `Никто с тобой сегодня не тусанет`;
-        }
+        if (lastOne === 1) return "человек тусанет";
+        if ([2, 3, 4].indexOf(lastOne) >= 0) return "человека тусанут";
+        return "человек тусанет";
     };
     return (
-        <h1
-            className={valueStatus > 0 ? `badge bg-primary` : `badge bg-danger`}
-        >
-            {numberStatus()}
-        </h1>
+        <h2>
+            <span
+                className={"badge " + (length > 0 ? "bg-primary" : "bg-danger")}
+            >
+                {length > 0
+                    ? `${length + " " + renderPhrase(length)}   с тобой сегодня`
+                    : "Никто с тобой не тусанет"}
+            </span>
+        </h2>
     );
 };
-
-Status.propTypes = {
-    value: PropTypes.array.isRequired
+SearchStatus.propTypes = {
+    length: PropTypes.number
 };
-export default Status;
+
+export default SearchStatus;

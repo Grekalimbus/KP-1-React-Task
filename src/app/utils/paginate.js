@@ -1,4 +1,4 @@
-export const Paginate = (items, pageNumber, pageSize) => {
-    const startIndex = (pageNumber - 1) * pageSize; // старт индекса массива users
+export function paginate(items, pageNumber, pageSize) {
+    const startIndex = (pageNumber - 1) * pageSize;
     return [...items].splice(startIndex, pageSize);
-};
+}

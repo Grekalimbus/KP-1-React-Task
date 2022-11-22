@@ -8,7 +8,6 @@ const GroupList = ({
     onItemSelect,
     selectedItem
 }) => {
-    // Рендер для объекта
     if (!Array.isArray(items)) {
         return (
             <ul className="list-group">
@@ -28,7 +27,6 @@ const GroupList = ({
             </ul>
         );
     }
-    // рендер для массива
     return (
         <ul className="list-group">
             {items.map((item) => (
@@ -58,4 +56,5 @@ GroupList.propTypes = {
     onItemSelect: PropTypes.func,
     selectedItem: PropTypes.object
 };
+
 export default GroupList;
