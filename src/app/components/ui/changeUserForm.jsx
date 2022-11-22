@@ -9,9 +9,6 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 
 const ChangeUserForm = ({ user }) => {
-    useEffect(() => {
-        console.log(user);
-    }, [user]);
     const history = useHistory();
     const qualitiesUser = [];
     user.qualities.forEach((user) => {
